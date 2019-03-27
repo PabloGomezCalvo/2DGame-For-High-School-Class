@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿//This script was picked from the youtube channel Brackeys. Go and check it out!!
+
+using UnityEngine;
 using UnityEngine.Events;
 
 public class CharacterController2D : MonoBehaviour
