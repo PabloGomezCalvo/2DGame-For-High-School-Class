@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 
     public CharacterController2D controller;    //referencia al objeto controlador
 
+    public Animator animator;   //referencia al Animator que usaremos para cambiar el valor de la variable Speed que controla nuestro paso de animaciones.
+
     public float velocity = 40f; //velocidad a la que se mueve el jugador
 
     float movimientoHorizontal = 0; //valor entre [-1,1] que viene del Input
@@ -21,8 +23,11 @@ public class PlayerController : MonoBehaviour
     {
         movimientoHorizontal = Input.GetAxisRaw("Horizontal") * velocity;
 
+        animator.SetFloat("Speed", Mathf.Abs(movimientoHorizontal));
+
         if (Input.GetButtonDown("Jump"))
         {
+            animator.SetBool("IsJumping", true);
             salto = true;
         }
 
@@ -43,5 +48,10 @@ public class PlayerController : MonoBehaviour
 
         controller.Move(movimientoHorizontal * Time.fixedDeltaTime, agachado, salto);
         salto = false;
+    }
+
+    public void OnLanding()
+    {
+        animator.SetBool("IsJumping", false);
     }
 }
